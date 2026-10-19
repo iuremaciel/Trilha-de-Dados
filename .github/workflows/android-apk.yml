@@ -1,4 +1,3 @@
-```yaml
 name: Gerar APK Android
 
 on:
@@ -18,13 +17,13 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Baixar código do repositório
+      - name: Baixar código
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
 
       - name: Instalar dependências
         run: npm install
@@ -47,26 +46,24 @@ jobs:
       - name: Sincronizar Capacitor
         run: npx cap sync android
 
-      - name: Verificar arquivos Android
+      - name: Verificar Gradle
         run: |
           if [ ! -f android/gradlew ]; then
-            echo "Erro: android/gradlew não foi encontrado."
-            echo "Verifique se a plataforma Android está configurada no projeto."
+            echo "Erro: arquivo android/gradlew não encontrado."
             exit 1
           fi
 
-      - name: Dar permissão ao Gradle
+      - name: Permitir execução do Gradle
         run: chmod +x android/gradlew
 
       - name: Gerar APK
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon
 
-      - name: Disponibilizar APK para download
+      - name: Disponibilizar APK
         uses: actions/upload-artifact@v4
         with:
           name: trilha-de-dados-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
-```
