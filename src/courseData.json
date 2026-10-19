@@ -1,0 +1,781 @@
+[
+  {
+    "number": 1,
+    "title": "Fundamentos de Computação e Matemática",
+    "disciplines": [
+      {
+        "title": "Introdução à Programação com Python",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "O que é um programa? Lógica de programação. Instalação do Python, VS Code e Jupyter Notebook.",
+            "exercise": "Instalar o ambiente e rodar seu primeiro \"Hello, World\"."
+          },
+          {
+            "number": 2,
+            "title": "Variáveis, tipos de dados (int, float, str, bool) e operadores aritméticos.",
+            "exercise": "Criar uma calculadora simples em terminal."
+          },
+          {
+            "number": 3,
+            "title": "Estruturas condicionais (if, elif, else). Tomada de decisão.",
+            "exercise": "Programa que classifica a nota de um aluno (aprovado/reprovado/recuperação)."
+          },
+          {
+            "number": 4,
+            "title": "Estruturas de repetição (for, while). Loop e iteração.",
+            "exercise": "Gerar a tabuada de qualquer número."
+          },
+          {
+            "number": 5,
+            "title": "Funções (def), parâmetros e retorno. Escopo de variáveis.",
+            "exercise": "Criar uma biblioteca de funções matemáticas (soma, média, maior valor)."
+          },
+          {
+            "number": 6,
+            "title": "Listas, tuplas e dicionários. Coleções de dados.",
+            "exercise": "Criar um sistema de cadastro de livros com título, autor e ano."
+          },
+          {
+            "number": 7,
+            "title": "Strings: métodos, formatação f-string, slicing.",
+            "exercise": "Limpeza básica de um texto (remover espaços, capitalizar)."
+          },
+          {
+            "number": 8,
+            "title": "Arquivos: ler e escrever arquivos .txt e .csv.",
+            "exercise": "Ler um arquivo CSV de vendas e imprimir o total."
+          }
+        ],
+        "projects": [
+          "Sistema de gerenciamento de tarefas (To-Do List) em terminal com persistência em arquivo."
+        ]
+      },
+      {
+        "title": "Matemática para Ciência de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Revisão de álgebra linear: vetores, matrizes, operações.",
+            "exercise": "Multiplicação de matrizes com numpy (introdução)."
+          },
+          {
+            "number": 2,
+            "title": "Estatística descritiva: média, mediana, moda, variância, desvio padrão.",
+            "exercise": "Calcular estatísticas de um conjunto de notas."
+          },
+          {
+            "number": 3,
+            "title": "Distribuições de probabilidade: normal, binomial, Poisson.",
+            "exercise": "Simular lançamentos de dado 10.000 vezes e plotar a distribuição."
+          },
+          {
+            "number": 4,
+            "title": "Inferência estatística: intervalos de confiança, testes de hipótese.",
+            "exercise": "Testar se a média de duas amostras é significativamente diferente."
+          },
+          {
+            "number": 5,
+            "title": "Correlação e regressão linear simples. Coeficiente de Pearson.",
+            "exercise": "Analisar a correlação entre horas de estudo e nota."
+          },
+          {
+            "number": 6,
+            "title": "Combinatória e permutações. Probabilidade condicional.",
+            "exercise": "Calcular probabilidades de eventos compostos."
+          }
+        ],
+        "projects": [
+          "Análise exploratória de um dataset de salários: calcular estatísticas, testar hipóteses sobre diferenças salariais por gênero."
+        ]
+      },
+      {
+        "title": "Fundamentos de Banco de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "O que é um banco de dados? Modelo relacional. Tabelas, chaves primárias e estrangeiras.",
+            "exercise": "Modelar o esquema de uma livraria."
+          },
+          {
+            "number": 2,
+            "title": "SQL: SELECT, WHERE, ORDER BY, LIMIT.",
+            "exercise": "Consultar os 10 livros mais vendidos."
+          },
+          {
+            "number": 3,
+            "title": "JOINs (INNER, LEFT, RIGHT, FULL). Relacionando tabelas.",
+            "exercise": "Listar todos os clientes e seus pedidos (mesmo sem pedidos)."
+          },
+          {
+            "number": 4,
+            "title": "Agregações: COUNT, SUM, AVG, MIN, MAX. GROUP BY e HAVING.",
+            "exercise": "Vendas por categoria e por mês."
+          },
+          {
+            "number": 5,
+            "title": "Subqueries, CTEs e window functions.",
+            "exercise": "Encontrar o produto mais vendido de cada categoria."
+          },
+          {
+            "number": 6,
+            "title": "CRUD completo: INSERT, UPDATE, DELETE. Transações.",
+            "exercise": "Criar um sistema de estoque simples."
+          }
+        ],
+        "projects": [
+          "Banco de dados de uma e-commerce com 5 tabelas (clientes, produtos, categorias, pedidos, itens_pedido) e 10 consultas complexas."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 2,
+    "title": "Análise de Dados e Visualização",
+    "disciplines": [
+      {
+        "title": "Python para Análise de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "NumPy: arrays, broadcasting, operações vetoriais.",
+            "exercise": "Operações matriciais com NumPy."
+          },
+          {
+            "number": 2,
+            "title": "Pandas: Series e DataFrame. Criação e inspeção.",
+            "exercise": "Carregar um CSV e explorar as primeiras linhas."
+          },
+          {
+            "number": 3,
+            "title": "Seleção e filtragem: loc, iloc, boolean indexing.",
+            "exercise": "Filtrar clientes de uma cidade específica."
+          },
+          {
+            "number": 4,
+            "title": "Manipulação: merge, concat, groupby, pivot_table.",
+            "exercise": "Juntar duas tabelas de vendas e calcular totais por região."
+          },
+          {
+            "number": 5,
+            "title": "Tratamento de dados faltantes e duplicados.",
+            "exercise": "Limpar um dataset com valores nulos e entradas duplicadas."
+          },
+          {
+            "number": 6,
+            "title": "Resampling, rolling windows e séries temporais básicas.",
+            "exercise": "Calcular média móvel de 7 dias em dados de temperatura."
+          },
+          {
+            "number": 7,
+            "title": "I/O: ler/escrever CSV, Excel, JSON, SQL.",
+            "exercise": "Pipeline que lê de SQL, processa e salva em Excel."
+          }
+        ],
+        "projects": [
+          "Pipeline de limpeza e análise de um dataset real (Kaggle: \"World Happiness Report\") com relatório em PDF."
+        ]
+      },
+      {
+        "title": "Visualização de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Princípios de visualização: o que é um bom gráfico? Escalas, cores, tipografia.",
+            "exercise": "Criticar 5 gráficos de jornais."
+          },
+          {
+            "number": 2,
+            "title": "Matplotlib: line plots, bar charts, scatter plots, subplots.",
+            "exercise": "Plotar a evolução do PIB brasileiro por ano."
+          },
+          {
+            "number": 3,
+            "title": "Seaborn: statistical plots, heatmaps, pair plots, distributions.",
+            "exercise": "Pair plot do dataset Iris."
+          },
+          {
+            "number": 4,
+            "title": "Plotly: gráficos interativos. Dash para dashboards.",
+            "exercise": "Dashboard interativo de vendas com filtros."
+          },
+          {
+            "number": 5,
+            "title": "Mapas: folium, geopandas. Visualização geoespacial.",
+            "exercise": "Mapa de calor de acidentes de trânsito por região."
+          },
+          {
+            "number": 6,
+            "title": "Storytelling com dados: como contar uma história com visualizações.",
+            "exercise": "Criar uma apresentação com 10 slides usando dados."
+          }
+        ],
+        "projects": [
+          "Dashboard completo em Plotly/Dash para uma empresa fictícia de e-commerce (vendas, clientes, produtos, geolocalização)."
+        ]
+      },
+      {
+        "title": "Estatística Aplicada",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Amostragem: tipos, viés, tamanho de amostra.",
+            "exercise": "Calcular o tamanho de amostra necessário para uma pesquisa."
+          },
+          {
+            "number": 2,
+            "title": "Testes de hipótese: t-test, chi-quadrado, ANOVA.",
+            "exercise": "Testar se três grupos têm médias diferentes."
+          },
+          {
+            "number": 3,
+            "title": "Regressão linear múltipla. Interpretação de coeficientes. R².",
+            "exercise": "Prever preço de casa com base em área, quartos, localização."
+          },
+          {
+            "number": 4,
+            "title": "A/B Testing: design, poder estatístico, interpretação.",
+            "exercise": "Simular um A/B test de conversão de site."
+          }
+        ],
+        "projects": [
+          "Relatório estatístico completo: coleta de dados (pesquisa), análise, testes e recomendações para uma startup."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 3,
+    "title": "Machine Learning e Engenharia de Dados",
+    "disciplines": [
+      {
+        "title": "Machine Learning I — Supervisionado",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "O que é ML? Pipeline de ML. Train/test split. Métricas (accuracy, precision, recall, F1, RMSE, MAE).",
+            "exercise": "Dividir um dataset e calcular métricas."
+          },
+          {
+            "number": 2,
+            "title": "Regressão linear (scikit-learn). Regularização L1/L2 (Ridge, Lasso).",
+            "exercise": "Prever consumo de energia."
+          },
+          {
+            "number": 3,
+            "title": "KNN e Naive Bayes.",
+            "exercise": "Classificar emails como spam/não-spam."
+          },
+          {
+            "number": 4,
+            "title": "Árvore de decisão e Random Forest.",
+            "exercise": "Classificar tipos de árvores (dataset Wine)."
+          },
+          {
+            "number": 5,
+            "title": "SVM (Support Vector Machine). Kernels.",
+            "exercise": "Classificar dígitos escritos à mão."
+          },
+          {
+            "number": 6,
+            "title": "Gradient Boosting: XGBoost, LightGBM.",
+            "exercise": "Competição no Kaggle (House Prices)."
+          },
+          {
+            "number": 7,
+            "title": "Hyperparameter tuning: GridSearchCV, RandomizedSearchCV.",
+            "exercise": "Tunar um modelo XGBoost."
+          }
+        ],
+        "projects": [
+          "Competição Kaggle: prever churn de clientes de telecom. Submeter e documentar o processo."
+        ]
+      },
+      {
+        "title": "Machine Learning II — Não Supervisionado e NLP",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "K-Means e hierárquico. Escolha de k. Silhouette score.",
+            "exercise": "Segmentação de clientes de e-commerce."
+          },
+          {
+            "number": 2,
+            "title": "PCA e redução de dimensionalidade.",
+            "exercise": "Reduzir dimensões do dataset MNIST e visualizar."
+          },
+          {
+            "number": 3,
+            "title": "Introdução a NLP: tokenização, stemming, lematização.",
+            "exercise": "Processar um corpus de notícias."
+          },
+          {
+            "number": 4,
+            "title": "Bag of Words, TF-IDF. Vetorização de texto.",
+            "exercise": "Classificar sentimentos de reviews de filmes."
+          },
+          {
+            "number": 5,
+            "title": "Word embeddings: Word2Vec, GloVe.",
+            "exercise": "Encontrar palavras semanticamente similares."
+          },
+          {
+            "number": 6,
+            "title": "Transformers e BERT (introdução). Hugging Face.",
+            "exercise": "Usar um modelo pré-treinado para classificação de texto."
+          }
+        ],
+        "projects": [
+          "Chatbot simples com NLP: classificação de intenções + resposta automática."
+        ]
+      },
+      {
+        "title": "Engenharia de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Arquitetura de pipelines de dados. ETL vs ELT.",
+            "exercise": "Desenhar a arquitetura de um pipeline."
+          },
+          {
+            "number": 2,
+            "title": "Apache Airflow: DAGs, tasks, schedules.",
+            "exercise": "Criar um DAG diário que extrai, transforma e carrega dados."
+          },
+          {
+            "number": 3,
+            "title": "SQL avançado: window functions, CTEs complexas, otimização.",
+            "exercise": "Otimizar uma query lenta em um banco grande."
+          },
+          {
+            "number": 4,
+            "title": "Data warehouses: Snowflake, BigQuery, Redshift. Modelagem star schema.",
+            "exercise": "Modelar um data warehouse para uma empresa de streaming."
+          },
+          {
+            "number": 5,
+            "title": "Ferramentas de orquestração e versionamento de dados.",
+            "exercise": "Versionar um dataset com DVC."
+          }
+        ],
+        "projects": [
+          "Pipeline ETL completo: extrair de API, transformar com Pandas, carregar em PostgreSQL, orquestrar com Airflow."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 4,
+    "title": "Deep Learning e Big Data",
+    "disciplines": [
+      {
+        "title": "Deep Learning",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Redes neurais: perceptron, camadas ocultas, funções de ativação.",
+            "exercise": "Implementar uma rede neural do zero com NumPy."
+          },
+          {
+            "number": 2,
+            "title": "Backpropagation. Gradient descent. Optimizers (SGD, Adam).",
+            "exercise": "Treinar uma rede para XOR."
+          },
+          {
+            "number": 3,
+            "title": "TensorFlow/Keras: construção de modelos. Overfitting e regularização.",
+            "exercise": "Classificar imagens de roupas (Fashion MNIST)."
+          },
+          {
+            "number": 4,
+            "title": "CNNs (Convolutional Neural Networks): convoluções, pooling.",
+            "exercise": "Classificar imagens de gatos e cachorros."
+          },
+          {
+            "number": 5,
+            "title": "RNNs e LSTMs: séries temporais e sequência.",
+            "exercise": "Prever preço de ação (simulação)."
+          },
+          {
+            "number": 6,
+            "title": "Transfer learning. Fine-tuning.",
+            "exercise": "Fine-tunar ResNet para classificar plantas."
+          }
+        ],
+        "projects": [
+          "Sistema de reconhecimento de placas de veículos com CNN."
+        ]
+      },
+      {
+        "title": "Big Data e Processamento Distribuído",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Limites do单机. MapReduce. Hadoop (conceitos).",
+            "exercise": "Entender o fluxo de um job MapReduce."
+          },
+          {
+            "number": 2,
+            "title": "Apache Spark: RDDs, DataFrames, Spark SQL.",
+            "exercise": "Processar um dataset de 10GB com PySpark."
+          },
+          {
+            "number": 3,
+            "title": "Streaming de dados: Kafka, Flink (conceitos).",
+            "exercise": "Consumir um stream de dados em tempo real."
+          },
+          {
+            "number": 4,
+            "title": "NoSQL: MongoDB, Cassandra, Redis. Quando usar.",
+            "exercise": "Escolher o banco certo para 3 cenários."
+          }
+        ],
+        "projects": [
+          "Pipeline de processamento de logs de servidor com Spark: agregar métricas por minuto."
+        ]
+      },
+      {
+        "title": "Cloud Computing para Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "AWS/GCP/Azure: serviços de dados (S3, GCS, Blob Storage).",
+            "exercise": "Upload/download de datasets na nuvem."
+          },
+          {
+            "number": 2,
+            "title": "Compute na nuvem: EC2, GCE, Lambda. Serverless.",
+            "exercise": "Rodar um script de análise em função serverless."
+          },
+          {
+            "number": 3,
+            "title": "Serviços gerenciados: SageMaker, Vertex AI, Databricks.",
+            "exercise": "Treinar um modelo no SageMaker."
+          },
+          {
+            "number": 4,
+            "title": "CI/CD para ML: MLflow, Kubeflow. MLOps.",
+            "exercise": "Versionar experimentos com MLflow."
+          }
+        ],
+        "projects": [
+          "Deploy de um modelo de ML como API na nuvem (FastAPI + Docker + AWS/GCP)."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 5,
+    "title": "Especialização e Domínio",
+    "disciplines": [
+      {
+        "title": "Análise de Negócios e BI",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "KPIs: definição, cálculo, dashboards executivos.",
+            "exercise": "Definir 10 KPIs para uma empresa de SaaS."
+          },
+          {
+            "number": 2,
+            "title": "Power BI / Tableau: modelagem de dados, DAX, cálculos.",
+            "exercise": "Dashboard executivo de vendas."
+          },
+          {
+            "number": 3,
+            "title": "Análise de coorte, retenção, LTV, CAC.",
+            "exercise": "Calcular LTV e CAC de uma empresa fictícia."
+          },
+          {
+            "number": 4,
+            "title": "Forecasting: ARIMA, Prophet, métodos estatísticos.",
+            "exercise": "Prever demanda de produtos para o próximo trimestre."
+          },
+          {
+            "number": 5,
+            "title": "A/B Testing em escala. Experimentação contínua.",
+            "exercise": "Desenhar um experimento para uma feature nova."
+          }
+        ],
+        "projects": [
+          "Relatório anual de performance de uma empresa: KPIs, forecast, recomendações estratégicas."
+        ]
+      },
+      {
+        "title": "Domínio Específico (Escolher 1)",
+        "lessons": [],
+        "projects": [
+          "Projeto completo no domínio escolhido: desde a coleta até a apresentação para stakeholders."
+        ]
+      },
+      {
+        "title": "Git, Colaboração e Boas Práticas",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Git e GitHub: branches, merge, rebase, pull requests.",
+            "exercise": "Fluxo de trabalho com 3 \"colaboradores\" (branches)."
+          },
+          {
+            "number": 2,
+            "title": "Docker: containers, Dockerfile, docker-compose.",
+            "exercise": "Containerizar um pipeline de dados."
+          },
+          {
+            "number": 3,
+            "title": "Testes: pytest, unit tests, integração.",
+            "exercise": "Cobrir 80% do código com testes."
+          },
+          {
+            "number": 4,
+            "title": "Documentação: README, docstrings, Jupyter notebooks para produção.",
+            "exercise": "Documentar um projeto completo."
+          },
+          {
+            "number": 5,
+            "title": "Code review, linting (flake8, black), CI/CD (GitHub Actions).",
+            "exercise": "Configurar pipeline de CI/CD."
+          }
+        ],
+        "projects": [
+          "Refatorar um projeto anterior com todas as boas práticas: Git, Docker, testes, documentação, CI/CD."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 6,
+    "title": "Avançado em ML e IA Aplicada",
+    "disciplines": [
+      {
+        "title": "Machine Learning Avançado",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Feature engineering: encoding, scaling, seleção de features.",
+            "exercise": "Melhorar um modelo com feature engineering."
+          },
+          {
+            "number": 2,
+            "title": "Ensemble methods: Stacking, Blending.",
+            "exercise": "Criar um ensemble que supere um modelo individual."
+          },
+          {
+            "number": 3,
+            "title": "Unbalanced data: SMOTE, class weights, focal loss.",
+            "exercise": "Classificar fraude (dataset imbalancado 1:1000)."
+          },
+          {
+            "number": 4,
+            "title": "SHAP e LIME: explicabilidade de modelos.",
+            "exercise": "Explicar as previsões de um modelo de crédito."
+          },
+          {
+            "number": 5,
+            "title": "AutoML: AutoGluon, H2O, Auto-sklearn.",
+            "exercise": "Comparar AutoML vs manual tuning."
+          },
+          {
+            "number": 6,
+            "title": "MLOps avançado: model monitoring, drift detection, retraining.",
+            "exercise": "Monitorar um modelo em produção."
+          }
+        ],
+        "projects": [
+          "Sistema de scoring de crédito end-to-end: desde a feature engineering até o deploy com monitoramento."
+        ]
+      },
+      {
+        "title": "IA Generativa e LLMs",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Arquitetura de Transformers em profundidade. Attention mechanism.",
+            "exercise": "Implementar self-attention do zero."
+          },
+          {
+            "number": 2,
+            "title": "Fine-tuning de LLMs: LoRA, QLoRA, PEFT.",
+            "exercise": "Fine-tunar LLaMA para um domínio específico."
+          },
+          {
+            "number": 3,
+            "title": "RAG (Retrieval Augmented Generation): embeddings, vector databases.",
+            "exercise": "Chatbot sobre documentos internos de uma empresa."
+          },
+          {
+            "number": 4,
+            "title": "Prompt engineering, chain-of-thought, function calling.",
+            "exercise": "Criar um agente que usa ferramentas (APIs) via LLM."
+          },
+          {
+            "number": 5,
+            "title": "Avaliação de LLMs: benchmarks, LLM-as-judge, métricas.",
+            "exercise": "Avaliar 3 modelos para uma tarefa específica."
+          },
+          {
+            "number": 6,
+            "title": "Deploy de LLMs: vLLM, TGI, quantização.",
+            "exercise": "Servir um LLM localmente com vLLM."
+          }
+        ],
+        "projects": [
+          "Assistente inteligente para uma empresa: RAG + fine-tuning + deploy."
+        ]
+      },
+      {
+        "title": "Ética, Privacidade e Governança de Dados",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "LGPD/GDPR: princípios, direitos do titular, base legal.",
+            "exercise": "Mapear dados pessoais em um sistema."
+          },
+          {
+            "number": 2,
+            "title": "Privacidade diferencial, anonimização, pseudonimização.",
+            "exercise": "Anonimizar um dataset de saúde."
+          },
+          {
+            "number": 3,
+            "title": "Viés em ML: fontes, mitigação, fairness metrics.",
+            "exercise": "Auditar um modelo de contratação por viés."
+          },
+          {
+            "number": 4,
+            "title": "Governança de dados: catalog, lineage, qualidade.",
+            "exercise": "Criar um data catalog para uma empresa."
+          }
+        ],
+        "projects": [
+          "Auditoria de viés e conformidade LGPD em um modelo de ML existente."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 7,
+    "title": "Estágio / Projeto Integrador I",
+    "disciplines": [
+      {
+        "title": "Projeto Integrador (120h)",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Semana 1-2: Briefing, definição do problema, escopo.",
+            "exercise": ""
+          },
+          {
+            "number": 2,
+            "title": "Semana 3-4: Coleta e preparação de dados.",
+            "exercise": ""
+          },
+          {
+            "number": 3,
+            "title": "Semana 5-8: Modelagem/análise.",
+            "exercise": ""
+          },
+          {
+            "number": 4,
+            "title": "Semana 9-10: Desenvolvimento da solução (app, dashboard, pipeline).",
+            "exercise": ""
+          },
+          {
+            "number": 5,
+            "title": "Semana 11-12: Testes, documentação, apresentação final.",
+            "exercise": ""
+          }
+        ],
+        "projects": []
+      },
+      {
+        "title": "Disciplina Complementar: Soft Skills para Dados (40h)",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Comunicação técnica: como explicar dados para não-técnicos.",
+            "exercise": ""
+          },
+          {
+            "number": 2,
+            "title": "Storytelling com dados: estrutura de narrativa.",
+            "exercise": ""
+          },
+          {
+            "number": 3,
+            "title": "Gestão de projetos ágeis: Scrum, Kanban.",
+            "exercise": ""
+          },
+          {
+            "number": 4,
+            "title": "Trabalho em equipe e code review.",
+            "exercise": ""
+          },
+          {
+            "number": 5,
+            "title": "Apresentação de resultados: slides, oral, escrita.",
+            "exercise": ""
+          }
+        ],
+        "projects": [
+          "Apresentar um projeto técnico para uma plateia de não-técnicos em 15 minutos."
+        ]
+      }
+    ],
+    "projects": []
+  },
+  {
+    "number": 8,
+    "title": "Estágio / Projeto Integrador II + TCC",
+    "disciplines": [
+      {
+        "title": "Projeto Integrador Final (120h)",
+        "lessons": [],
+        "projects": []
+      },
+      {
+        "title": "TCC — Trabalho de Conclusão de Curso (80h)",
+        "lessons": [
+          {
+            "number": 1,
+            "title": "Consistência > Intensidade. 2-3h por dia todo dia vale mais que 10h num sábado.",
+            "exercise": ""
+          },
+          {
+            "number": 2,
+            "title": "Projeto > Teoria. Todo conceito aprendido deve virar código.",
+            "exercise": ""
+          },
+          {
+            "number": 3,
+            "title": "Portfólio desde o semestre 1. GitHub ativo, LinkedIn atualizado, blog técnico.",
+            "exercise": ""
+          },
+          {
+            "number": 4,
+            "title": "Comunidade. Kaggle, Discord de dados, meetups locais, hackathons.",
+            "exercise": ""
+          },
+          {
+            "number": 5,
+            "title": "Inglês. A maior parte dos recursos, papers e vagas exigem inglês. Estude em paralelo.",
+            "exercise": ""
+          },
+          {
+            "number": 6,
+            "title": "Especialize-se cedo. A partir do semestre 5, foque em um domínio (fintech, saúde, varejo, marketing).",
+            "exercise": ""
+          }
+        ],
+        "projects": []
+      }
+    ],
+    "projects": []
+  }
+]
