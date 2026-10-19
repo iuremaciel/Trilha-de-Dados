@@ -1,42 +1,72 @@
+```yaml
 name: Gerar APK Android
+
 on:
   workflow_dispatch:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+      - master
+
 permissions:
   contents: read
+
 jobs:
-  build-apk:
+  build:
+    name: Compilar aplicativo Android
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+
     steps:
-      - name: Baixar o código
+      - name: Baixar código do repositório
         uses: actions/checkout@v4
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+
       - name: Instalar dependências
         run: npm install
-      - name: Compilar o aplicativo web
+
+      - name: Compilar aplicativo web
         run: npm run build
-      - name: Criar projeto Android
-        run: npx cap add android
-      - name: Sincronizar arquivos
-        run: npx cap sync android
+
       - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
-      - name: Gerar APK debug
+          java-version: '17'
+
+      - name: Preparar plataforma Android
         run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+
+      - name: Sincronizar Capacitor
+        run: npx cap sync android
+
+      - name: Verificar arquivos Android
+        run: |
+          if [ ! -f android/gradlew ]; then
+            echo "Erro: android/gradlew não foi encontrado."
+            echo "Verifique se a plataforma Android está configurada no projeto."
+            exit 1
+          fi
+
+      - name: Dar permissão ao Gradle
+        run: chmod +x android/gradlew
+
+      - name: Gerar APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
       - name: Disponibilizar APK para download
         uses: actions/upload-artifact@v4
         with:
           name: trilha-de-dados-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+          retention-days: 14
+```
