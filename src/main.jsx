@@ -90,9 +90,168 @@ function makeLessonContent(lesson) {
  }
  return { intro, concepts, example, exercise };
 }
+
+const todoProjectCode = `import json
+from pathlib import Path
+
+ARQUIVO = Path("tarefas.json")
+
+
+def carregar_tarefas():
+    """Carrega tarefas salvas; se o arquivo não existir, começa vazio."""
+    if not ARQUIVO.exists():
+        return []
+    try:
+        with ARQUIVO.open("r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+        if isinstance(dados, list):
+            return dados
+        print("Aviso: formato de arquivo inesperado. Lista vazia iniciada.")
+        return []
+    except (json.JSONDecodeError, OSError) as erro:
+        print(f"Não foi possível ler o arquivo: {erro}")
+        return []
+
+
+def salvar_tarefas(tarefas):
+    """Salva a lista completa em JSON para continuar disponível depois."""
+    with ARQUIVO.open("w", encoding="utf-8") as arquivo:
+        json.dump(tarefas, arquivo, ensure_ascii=False, indent=2)
+
+
+def listar_tarefas(tarefas):
+    if not tarefas:
+        print("\\nNenhuma tarefa cadastrada.")
+        return
+    print("\\n--- MINHAS TAREFAS ---")
+    for indice, tarefa in enumerate(tarefas, start=1):
+        status = "✓ concluída" if tarefa["concluida"] else "○ pendente"
+        print(f"{indice}. {tarefa['titulo']} — {status}")
+
+
+def adicionar_tarefa(tarefas):
+    titulo = input("Digite a descrição da tarefa: ").strip()
+    if not titulo:
+        print("A descrição não pode ficar vazia.")
+        return
+    tarefas.append({"titulo": titulo, "concluida": False})
+    salvar_tarefas(tarefas)
+    print("Tarefa adicionada e salva!")
+
+
+def concluir_tarefa(tarefas):
+    listar_tarefas(tarefas)
+    if not tarefas:
+        return
+    try:
+        numero = int(input("Número da tarefa para alternar status: "))
+        if numero < 1 or numero > len(tarefas):
+            print("Número fora da lista.")
+            return
+    except ValueError:
+        print("Digite um número inteiro válido.")
+        return
+    tarefa = tarefas[numero - 1]
+    tarefa["concluida"] = not tarefa["concluida"]
+    salvar_tarefas(tarefas)
+    print("Status atualizado e salvo!")
+
+
+def excluir_tarefa(tarefas):
+    listar_tarefas(tarefas)
+    if not tarefas:
+        return
+    try:
+        numero = int(input("Número da tarefa para excluir: "))
+        if numero < 1 or numero > len(tarefas):
+            print("Número fora da lista.")
+            return
+    except ValueError:
+        print("Digite um número inteiro válido.")
+        return
+    removida = tarefas.pop(numero - 1)
+    salvar_tarefas(tarefas)
+    print(f"Tarefa removida: {removida['titulo']}")
+
+
+def menu():
+    tarefas = carregar_tarefas()
+    while True:
+        print("\\n=== ORGANIZADOR DE TAREFAS ===")
+        print("1. Listar tarefas")
+        print("2. Adicionar tarefa")
+        print("3. Marcar/desmarcar conclusão")
+        print("4. Excluir tarefa")
+        print("0. Sair")
+        opcao = input("Escolha uma opção: ").strip()
+
+        if opcao == "1":
+            listar_tarefas(tarefas)
+        elif opcao == "2":
+            adicionar_tarefa(tarefas)
+        elif opcao == "3":
+            concluir_tarefa(tarefas)
+        elif opcao == "4":
+            excluir_tarefa(tarefas)
+        elif opcao == "0":
+            print("Até logo! Suas tarefas permanecem salvas.")
+            break
+        else:
+            print("Opção inválida. Escolha uma opção do menu.")
+
+
+if __name__ == "__main__":
+    menu()
+`;
+
+const todoLessons = [
+ {title:"1. Planejamento e requisitos",time:"30 min",goal:"Transformar uma ideia em requisitos claros.",body:["Um programa começa com um problema definido. Nosso problema é lembrar tarefas e consultar seu estado sem depender da memória.","Requisitos funcionais descrevem ações: adicionar, listar, concluir e excluir. Requisitos de qualidade descrevem como o sistema deve se comportar: mensagens compreensíveis, validação de entradas e dados preservados ao fechar o programa.","Antes de programar, desenhe o fluxo: iniciar → carregar arquivo → mostrar menu → executar opção → voltar ao menu → sair."],tasks:["O programa deve permitir adicionar uma tarefa com descrição não vazia.","A lista precisa continuar existindo depois de fechar e abrir o programa.","A entrada inválida não pode encerrar o programa inesperadamente."],exercise:"Escreva mais dois requisitos funcionais e um requisito de qualidade para seu organizador."},
+ {title:"2. Modelagem dos dados",time:"35 min",goal:"Representar cada tarefa com uma estrutura simples.",body:["Cada tarefa terá dois campos: titulo (texto) e concluida (booleano True/False). Uma lista agrupa várias tarefas e cada elemento da lista será um dicionário.","Exemplo: {'titulo': 'Estudar Python', 'concluida': False}. Dicionários são úteis quando um registro tem campos nomeados. Listas são úteis quando precisamos guardar vários registros em ordem.","O número mostrado na tela começa em 1, mas os índices de listas começam em 0. Por isso, para acessar o item escolhido pelo usuário, usamos tarefas[numero - 1]."],tasks:["Identifique o tipo de dado de titulo.","Identifique os dois possíveis valores de concluida.","Explique por que numero - 1 é necessário ao acessar uma lista."],exercise:"Crie manualmente uma lista com três tarefas fictícias, duas pendentes e uma concluída."},
+ {title:"3. Funções e responsabilidades",time:"40 min",goal:"Dividir o programa em funções menores e testáveis.",body:["Uma função agrupa uma responsabilidade com um nome. carregar_tarefas lê os dados; salvar_tarefas escreve; listar_tarefas apresenta; adicionar_tarefa inclui; concluir_tarefa muda o estado; excluir_tarefa remove; menu coordena o fluxo.","Essa separação evita um único bloco enorme e facilita localizar erros. Cada função recebe ou usa os dados necessários, realiza uma tarefa e retorna o controle ao chamador.","A função input retorna texto. Quando precisamos de um número, convertemos com int() e tratamos ValueError, pois o usuário pode digitar letras."],tasks:["Aponte qual função é responsável por salvar os dados.","Por que a conversão int(input(...)) precisa de tratamento de erro?", "Adicione comentários curtos que expliquem decisões importantes, não cada linha óbvia."],exercise:"Desenhe um mapa das funções e escreva em uma frase o que cada uma faz."},
+ {title:"4. Menu, condições e repetição",time:"40 min",goal:"Criar uma interface de terminal que continue funcionando até o usuário sair.",body:["while True mantém o menu ativo. A opção digitada é comparada com if/elif/else para decidir qual função executar. A opção 0 usa break para sair do laço.","A opção deve ser lida como texto e comparada com '1', '2', '3', '4' e '0'. Isso evita converter uma opção que pode conter qualquer caractere.","Toda entrada de índice precisa ser validada: primeiro verificar se a lista não está vazia, depois converter a opção em inteiro e conferir se está entre 1 e len(tarefas)."],tasks:["O que aconteceria se o menu não tivesse break?", "Qual mensagem deve aparecer para a opção 9?", "Por que a lista vazia deve ser verificada antes de escolher uma tarefa?"],exercise:"Acrescente a opção 5 para mostrar quantas tarefas estão pendentes."},
+ {title:"5. Persistência em arquivo JSON",time:"45 min",goal:"Salvar e recuperar tarefas entre execuções.",body:["Variáveis existem durante a execução, mas desaparecem quando o programa termina. Persistência significa gravar os dados em um armazenamento durável, neste caso o arquivo tarefas.json.","O módulo json converte listas e dicionários Python para um formato de texto estruturado. json.dump grava; json.load lê. O parâmetro ensure_ascii=False mantém acentos legíveis e indent=2 facilita inspecionar o arquivo.","Path verifica se o arquivo existe. Se não existir, começamos com uma lista vazia. Se o arquivo estiver vazio ou com JSON inválido, tratamos JSONDecodeError para evitar uma falha sem explicação."],tasks:["Qual a diferença entre guardar uma lista numa variável e gravá-la num arquivo?", "Para que serve encoding='utf-8'?", "Abra tarefas.json depois de adicionar uma tarefa e observe a estrutura."],exercise:"Teste o programa: adicione duas tarefas, feche e execute de novo. Confirme se as tarefas foram recuperadas."},
+ {title:"6. Testes, depuração e melhorias",time:"35 min",goal:"Verificar os caminhos normais e os casos extremos.",body:["Um teste é uma tentativa planejada de confirmar um comportamento. Não teste apenas o caminho feliz: teste lista vazia, descrição em branco, letras onde se espera um número, índice fora da faixa e arquivo inexistente.","Depurar é localizar a causa de um problema. Leia a última linha do erro, reproduza o comportamento e teste uma alteração por vez. Mensagens claras ajudam tanto o usuário quanto quem desenvolve.","Depois da versão básica, você pode adicionar prioridade, data limite, categorias, pesquisa, edição de título, confirmação de exclusão e testes automatizados. Faça uma melhoria por vez para entender seu impacto."],tasks:["Liste cinco casos de teste e o resultado esperado para cada um.","Simule digitar 'abc' quando o sistema pede o número da tarefa.","Proponha uma melhoria e descreva como você a testaria."],exercise:"Execute a lista de testes finais disponível no final deste projeto e registre os resultados."}
+];
+
+function ProjectOnePage({onBack}) {
+ const [tab,setTab] = useState("trilha");
+ const [lessonIndex,setLessonIndex] = useState(0);
+ const [answer,setAnswer] = useState("");
+ const [checked,setChecked] = useState(false);
+ const [quiz,setQuiz] = useState({});
+ const [done,setDone] = useState(()=>{try{return JSON.parse(localStorage.getItem("trilha-todo-project-done"))||[]}catch{return[]}});
+ useEffect(()=>{localStorage.setItem("trilha-todo-project-done",JSON.stringify(done))},[done]);
+ const lesson=todoLessons[lessonIndex];
+ const toggleDone=(i)=>setDone(prev=>prev.includes(i)?prev.filter(n=>n!==i):[...prev,i]);
+ const questions=[
+  {q:"Qual estrutura representa melhor uma tarefa com título e estado?",opts:["Uma string isolada","Um dicionário com título e concluída","Uma matriz NumPy"],correct:1,why:"O dicionário agrupa campos nomeados; a lista reúne várias tarefas."},
+  {q:"Por que usamos tarefas[numero - 1]?",opts:["Porque listas começam no índice 1","Porque input sempre retorna 0","Porque a tela conta desde 1, mas a lista começa no índice 0"],correct:2,why:"O número exibido para a pessoa precisa ser convertido para índice Python."},
+  {q:"Qual é o papel de json.dump()?",opts:["Gravar dados Python no arquivo JSON","Mostrar o menu","Apagar o arquivo automaticamente"],correct:0,why:"json.dump serializa objetos Python em JSON e os escreve num arquivo."},
+  {q:"O que while True faz no menu?",opts:["Executa o menu uma única vez","Repete o menu até uma saída explícita, como break","Cria automaticamente um arquivo"],correct:1,why:"O laço continua até que uma condição de saída seja acionada."},
+  {q:"Qual é uma boa forma de lidar com uma entrada que não pode ser convertida para inteiro?",opts:["Ignorar o erro e fechar o programa","Tratar ValueError e pedir uma entrada válida","Transformar tudo em float sem validar"],correct:1,why:"O tratamento de ValueError permite informar o problema e continuar o programa."}
+ ];
+ return <div className="page project-detail-page">
+  <button className="back" onClick={onBack}>← Voltar aos projetos</button>
+  <div className="project-hero"><span className="eyebrow">PROJETO 1 · SEMESTRE 1 · PYTHON</span><h1>Organizador de tarefas (To-Do List)</h1><p>Construa um programa de terminal completo para cadastrar, listar, concluir e excluir tarefas, mantendo tudo salvo em um arquivo JSON.</p><div className="project-meta"><span>⏱ 4 a 5 horas</span><span>◎ Iniciante</span><span>⌘ Python 3</span><span>▤ 6 módulos</span></div><div className="project-progress"><div><b>{done.length} de {todoLessons.length} módulos concluídos</b><span>{Math.round(done.length/todoLessons.length*100)}%</span></div><i><span style={{width:`${done.length/todoLessons.length*100}%`}}/></i></div></div>
+  <div className="project-learning-grid"><div className="project-learning-card"><b>🎯 Objetivo final</b><p>Entregar uma aplicação funcional que continua lembrando das tarefas depois que o programa é fechado.</p></div><div className="project-learning-card"><b>🧠 Competências</b><p>Variáveis, listas, dicionários, funções, condições, laços, validação e arquivos JSON.</p></div><div className="project-learning-card"><b>📦 Entrega</b><p>Arquivo <code>main.py</code>, arquivo de dados gerado automaticamente e testes documentados.</p></div></div>
+  <div className="project-tabs">{[["trilha","Trilha de aulas"],["codigo","Código completo"],["atividades","Atividades"],["avaliacao","Quiz e testes"]].map(([id,label])=><button key={id} className={tab===id?"on":""} onClick={()=>setTab(id)}>{label}</button>)}</div>
+  {tab==="trilha"&&<div className="project-course-layout"><nav className="project-lesson-nav"><h3>Roteiro de aprendizagem</h3><p>Estude em sequência. Cada módulo prepara o próximo.</p>{todoLessons.map((l,i)=><button key={l.title} className={lessonIndex===i?"current":""} onClick={()=>setLessonIndex(i)}><span className={done.includes(i)?"module-number complete":"module-number"}>{done.includes(i)?"✓":i+1}</span><span><b>{l.title}</b><small>{l.time}</small></span><span>›</span></button>)}</nav><article className="project-lesson-content"><span className="content-label">MÓDULO {lessonIndex+1} DE {todoLessons.length} · {lesson.time.toUpperCase()}</span><h2>{lesson.title}</h2><p className="module-goal"><b>Ao final deste módulo:</b> {lesson.goal}</p>{lesson.body.map((para,i)=><p key={i}>{para}</p>)}<h3>Atividade guiada</h3><ol>{lesson.tasks.map((t,i)=><li key={i}>{t}</li>)}</ol><div className="project-exercise-box"><b>✍️ Sua atividade</b><p>{lesson.exercise}</p><textarea value={answer} onChange={e=>setAnswer(e.target.value)} placeholder="Registre aqui sua resposta, raciocínio ou resultado..." rows="4"/><p className="muted">A resposta fica nesta tela enquanto você estiver no módulo. Para guardar permanentemente, copie para suas anotações.</p></div><div className="module-controls"><button className="outline" disabled={lessonIndex===0} onClick={()=>{setLessonIndex(i=>i-1);setAnswer("")}}>← Módulo anterior</button><button className="primary" onClick={()=>toggleDone(lessonIndex)}>{done.includes(lessonIndex)?"Desmarcar conclusão":"Marcar módulo concluído ✓"}</button><button className="outline" disabled={lessonIndex===todoLessons.length-1} onClick={()=>{setLessonIndex(i=>i+1);setAnswer("")}}>Próximo módulo →</button></div></article></div>}
+  {tab==="codigo"&&<div className="content-card project-code-card"><span className="content-label">IMPLEMENTAÇÃO DE REFERÊNCIA</span><h2>Código completo — main.py</h2><p>Crie uma pasta para o projeto e salve o código abaixo em um arquivo chamado <code>main.py</code>. Ele usa apenas a biblioteca padrão do Python; não precisa instalar pacotes adicionais.</p><div className="code-toolbar"><span>Python · main.py</span><button className="outline" onClick={()=>navigator.clipboard?.writeText(todoProjectCode).then(()=>alert("Código copiado!"),()=>alert("Não foi possível copiar automaticamente. Selecione o código e copie manualmente."))}>Copiar código</button></div><pre className="full-code"><code>{todoProjectCode}</code></pre><h3>Como executar</h3><ol><li>Instale o Python 3 e abra um terminal na pasta do projeto.</li><li>Execute <code>python main.py</code>. Em alguns sistemas, use <code>python3 main.py</code>.</li><li>Adicione tarefas pelo menu. O arquivo <code>tarefas.json</code> será criado automaticamente na mesma pasta.</li><li>Feche o programa, execute novamente e confira se as tarefas continuam lá.</li></ol><div className="tip"><b>Por que salvar só depois de alterar a lista?</b><p>O programa chama salvar_tarefas após adicionar, concluir ou excluir. Assim, cada mudança importante é gravada imediatamente.</p></div></div>}
+  {tab==="atividades"&&<div className="activity-grid">{[
+   {level:"NÍVEL 1 · FUNDAMENTAL",title:"Contador de tarefas",desc:"Adicione ao menu uma opção que informe quantas tarefas existem no total.",steps:["Use len(tarefas).","Crie uma função contar_tarefas(tarefas).","Teste com lista vazia e com três tarefas."],deliver:"A função deve exibir 0 quando não houver tarefas."},
+   {level:"NÍVEL 2 · INTERMEDIÁRIO",title:"Resumo de pendências",desc:"Mostre separadamente quantas tarefas estão concluídas e quantas continuam pendentes.",steps:["Percorra a lista com for.","Conte tarefas com concluida igual a True.","Calcule pendentes = total - concluídas."],deliver:"Exiba um resumo como: 5 tarefas, 2 concluídas, 3 pendentes."},
+   {level:"NÍVEL 3 · DESAFIO",title:"Prioridade da tarefa",desc:"Amplie o dicionário para guardar uma prioridade: baixa, média ou alta.",steps:["Peça prioridade ao cadastrar.","Valide a entrada antes de salvar.","Mostre a prioridade ao listar tarefas.","Verifique que tarefas antigas sem esse campo não quebrem o programa."],deliver:"Explique como você trataria os dados já gravados no formato antigo."},
+   {level:"NÍVEL 4 · PROJETO EXTRA",title:"Editar descrição",desc:"Permita selecionar uma tarefa e trocar seu título sem criar uma nova tarefa.",steps:["Liste as tarefas numeradas.","Valide o número escolhido.","Peça um novo título não vazio.","Atualize a tarefa e salve o arquivo."],deliver:"Demonstre que a tarefa continua com o mesmo estado de conclusão após a edição."}
+  ].map((a,i)=><article className="activity-card" key={a.title}><span className="project-kicker">{a.level}</span><h2>{a.title}</h2><p>{a.desc}</p><h3>Passos sugeridos</h3><ol>{a.steps.map(st=><li key={st}>{st}</li>)}</ol><div className="activity-deliver"><b>Critério de conclusão</b><p>{a.deliver}</p></div></article>)}</div>}
+  {tab==="avaliacao"&&<div className="quiz-layout"><article className="content-card"><span className="content-label">VERIFIQUE SEU APRENDIZADO</span><h2>Quiz de fundamentos</h2><p>Responda às cinco questões. Depois confira as explicações para revisar os conceitos.</p>{questions.map((q,i)=><div className="quiz-question" key={q.q}><b>{i+1}. {q.q}</b>{q.opts.map((op,j)=><label key={op} className="quiz-option"><input type="radio" name={`q${i}`} checked={quiz[i]===j} onChange={()=>setQuiz(v=>({...v,[i]:j}))}/>{op}</label>)}{checked&&<p className={quiz[i]===q.correct?"quiz-feedback right":"quiz-feedback wrong"}>{quiz[i]===q.correct?"Correto! ":"Revise: "}{q.why}</p>}</div>)}<button className="primary" onClick={()=>setChecked(true)}>Conferir respostas</button>{checked&&<p className="quiz-score">Pontuação: {questions.filter((q,i)=>quiz[i]===q.correct).length} / {questions.length}</p>}</article><aside className="content-card"><h2>Checklist de testes</h2><p>Antes de considerar o projeto pronto, teste manualmente:</p>{["O programa inicia sem tarefas salvas.","Consigo adicionar uma tarefa válida.","Descrição vazia é recusada.","A lista mostra todas as tarefas.","Consigo concluir e reabrir uma tarefa.","Letras no lugar de número não derrubam o programa.","Número fora da faixa gera aviso.","Consigo excluir uma tarefa específica.","As mudanças permanecem após reiniciar.","A opção 0 encerra o programa normalmente."].map((t,i)=><label className="test-check" key={t}><input type="checkbox"/>{t}</label>)}<div className="tip"><b>Entrega final</b><p>Inclua o código, um pequeno README com instruções de execução e uma lista dos testes realizados. Explique também uma dificuldade que encontrou e como resolveu.</p></div></aside></div>}
+  <div className="project-resources"><h2>Materiais para aprofundar</h2><a href="https://docs.python.org/pt-br/3/tutorial/" target="_blank" rel="noreferrer">Tutorial oficial de Python ↗</a><a href="https://docs.python.org/pt-br/3/library/json.html" target="_blank" rel="noreferrer">Documentação do módulo json ↗</a><a href="https://www.youtube.com/results?search_query=python+projeto+lista+de+tarefas+arquivo+json+portugu%C3%AAs" target="_blank" rel="noreferrer">Buscar videoaulas sobre To-Do List em Python ↗</a></div>
+ </div>
+}
+
 function App() {
  const [progress,setProgress] = useState(initial);
  const [view,setView] = useState("home");
+ const [projectReturnView,setProjectReturnView] = useState("projects");
  const [selectedSemester,setSelectedSemester] = useState(1);
  const [selectedDiscipline,setSelectedDiscipline] = useState(null);
  const [selectedLesson,setSelectedLesson] = useState(null);
@@ -144,7 +303,8 @@ function App() {
     {activeTab==="anotacoes" && <div className="content-card"><h2>Minhas anotações</h2><p>Guarde definições, dúvidas, comandos úteis e exemplos que queira revisar depois.</p><textarea value={note} onChange={e=>setNote(e.target.value)} placeholder="Escreva suas anotações desta aula..." rows="9"/><button className="primary" onClick={saveNote}>Salvar anotações</button><p className="muted">As anotações ficam salvas neste dispositivo.</p></div>}
    </div>}
    {view==="search" && <div className="page"><div className="page-title"><span className="eyebrow">BIBLIOTECA DO CURSO</span><h1>Buscar conteúdo</h1><p>Pesquise por assunto, disciplina ou semestre.</p></div><input className="search-input" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ex.: Python, SQL, regressão, redes neurais..."/><div className="search-results"><p>{filtered.length} aulas encontradas</p>{filtered.map(l=><button key={l.id} className="search-result" onClick={()=>openLesson(l)}><span className="lesson-check">{l.semester}</span><span><b>{l.title}</b><small>{l.discipline} · Semestre {l.semester}</small></span><span>→</span></button>)}</div></div>}
-   {view==="projects" && <div className="page"><div className="page-title"><span className="eyebrow">PORTFÓLIO</span><h1>Projetos práticos</h1><p>Transforme teoria em projetos que demonstram suas habilidades.</p></div><div className="project-grid">{allProjects.map(p=><div className="project-card" key={p.id}><span className="project-kicker">SEMESTRE {p.semester} · {p.discipline}</span><h3>{p.title}</h3><p>Defina o problema, documente os dados, implemente uma solução, teste os resultados e registre o que aprendeu.</p><a href={`https://www.youtube.com/results?search_query=${encodeURIComponent(p.title+" tutorial projeto")}`} target="_blank" rel="noreferrer">Ver referências ↗</a></div>)}</div></div>}
+   {view==="projects" && <div className="page"><div className="page-title"><span className="eyebrow">PORTFÓLIO</span><h1>Projetos práticos</h1><p>Transforme teoria em projetos que demonstram suas habilidades.</p></div><div className="project-grid">{allProjects.map((p,index)=><div className="project-card" key={p.id}><span className="project-kicker">SEMESTRE {p.semester} · {p.discipline}</span><h3>{p.title}</h3><p>{index===0?"Projeto guiado completo: aulas em sequência, código comentado, atividades progressivas, quiz e checklist de testes.":"Defina o problema, documente os dados, implemente uma solução, teste os resultados e registre o que aprendeu."}</p>{index===0?<button className="primary" onClick={()=>{setProjectReturnView("projects");setView("project-detail")}}>Estudar projeto completo →</button>:<a href={`https://www.youtube.com/results?search_query=${encodeURIComponent(p.title+" tutorial projeto")}`} target="_blank" rel="noreferrer">Ver referências ↗</a>}</div>)}</div></div>}
+   {view==="project-detail" && <ProjectOnePage onBack={()=>setView(projectReturnView)}/>}
    <footer>Trilha de Dados <span>•</span> Estude com consistência, pratique com curiosidade.</footer>
   </main>
  </div>
